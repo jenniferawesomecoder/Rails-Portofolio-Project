@@ -1,0 +1,33 @@
+<h1>Sign Up for TV-Shows</h1>
+<% if session[:user_id] %>
+  <h1><%= @user.name %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+<% else %>
+<p><%= button_to "Sign Up with Facebook", '/auth/Facebook', class: "btn btn-outline-primary" %></p>
+<% end %>
+<p><%= button_to "Sign Up with Google", '/auth/google_oauth2', class: "btn btn-outline-primary" %></p>
+
+<p>or enter in your details below:</p>
+
+<% if @user.errors.any? %>
+<div class="alert alert-danger" role="alert">
+  <ul>
+  <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_for @user do |f| %>
+  <strong><%= f.label :email %></strong> <%= f.text_field :email, class:"form-control" %><br>
+  <strong><%= f.label :username %></strong> <%= f.text_field :username, class:"form-control" %><br>
+  <strong><%= f.label :password %></strong> <%= f.password_field :password, class:"form-control" %><br>
+  <strong><%= f.label :password_confirmation %></strong> <%= f.password_field :password_confirmation, class:"form-control" %><br>
+  <%= f.submit "Create my account", class: "btn btn-primary" %>
+<% end %>
+
+
+<p>Already have an Account? <%= link_to "Log In", login_path %></p>

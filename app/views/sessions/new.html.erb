@@ -1,0 +1,20 @@
+<h1>Login</h1>
+<% if session[:user_id] %>
+  <h1><%= @user.username %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+<% else %>
+<p><%= button_to "Login with Facebook", '/auth/Facebook', class: "btn btn-outline-primary" %></p>
+<% end %>
+<p><%= button_to "Login with Google", '/auth/google_oauth2', class: "btn btn-outline-primary" %></p>
+<p>or enter in your details below:</p>
+
+<%= form_for(:session, url: login_path) do |f| %>
+  <strong><%= f.label :email %></strong> <%= f.text_field :email, class:"form-control"  %><br>
+  <strong><%= f.label :password %></strong> <%= f.password_field :password, class:"form-control"  %><br>
+  <%= f.submit "Login", class: "btn btn-primary" %>
+<% end %>
+
+
+<p>New user? <%= link_to "Sign up!", new_user_path %></p>
