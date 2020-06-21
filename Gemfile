@@ -9,7 +9,7 @@ gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 
 gem 'bcrypt'
 
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 
 gem 'thin'
 
